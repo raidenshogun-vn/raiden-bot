@@ -1,0 +1,144 @@
+├── character_language
+│   ├── character_de.js
+│   ├── character_en.js
+│   ├── character_es.js
+│   ├── character_fr.js
+│   ├── character_id.js
+│   ├── character_jp.js
+│   ├── character_ko.js
+│   ├── character_pt.js
+│   ├── character_ru.js
+│   ├── character_th.js
+│   ├── character_vn.js
+│   ├── character_zh.js
+├── commands
+│   ├── admin
+│   │   ├── quota.js
+│   ├── clear-bot-messages.js
+│   ├── clear-last-bot-message.js
+│   ├── clear-situation.js
+│   ├── language.js
+│   ├── report.js
+│   ├── reset-chat.js
+│   ├── response-limit.js
+│   ├── set-mode.js
+│   ├── settings.js
+│   ├── view-situation.js
+├── config
+│   ├── aiConfig.js
+│   ├── character.js
+│   ├── languageMap.js
+├── events
+│   ├── guildCreate.js
+│   ├── interactionCreate.js
+│   ├── messageListener.js
+├── interactions
+│   ├── buttons
+│   │   ├── cancel_nsfw.js
+│   │   ├── confirm_nsfw.js
+│   │   ├── index.js
+│   ├── modals
+│   │   ├── index.js
+│   │   ├── modal_dynamic.js
+├── language
+│   ├── de.js
+│   ├── en.js
+│   ├── es.js
+│   ├── fr.js
+│   ├── id.js
+│   ├── jp.js
+│   ├── ko.js
+│   ├── pt.js
+│   ├── ru.js
+│   ├── th.js
+│   ├── vn.js
+│   ├── zh.js
+├── models
+│   ├── CharacterHistory.js
+│   ├── QuotaLog.js
+│   ├── Report.js
+│   ├── TokenSettings.js
+│   ├── User.js
+│   ├── UserChatHistory.js
+│   ├── UserNotice.js
+│   ├── UserSituation.js
+├── prompts
+│   ├── autores
+│   │   ├── autores_de.js
+│   │   ├── autores_en.js
+│   │   ├── autores_es.js
+│   │   ├── autores_fr.js
+│   │   ├── autores_id.js
+│   │   ├── autores_jp.js
+│   │   ├── autores_ko.js
+│   │   ├── autores_pt.js
+│   │   ├── autores_ru.js
+│   │   ├── autores_th.js
+│   │   ├── autores_vn.js
+│   │   ├── autores_zh.js
+│   ├── dynamic
+│   │   ├── dynamic_de.js
+│   │   ├── dynamic_en.js
+│   │   ├── dynamic_es.js
+│   │   ├── dynamic_fr.js
+│   │   ├── dynamic_id.js
+│   │   ├── dynamic_jp.js
+│   │   ├── dynamic_ko.js
+│   │   ├── dynamic_pt.js
+│   │   ├── dynamic_ru.js
+│   │   ├── dynamic_th.js
+│   │   ├── dynamic_vn.js
+│   │   ├── dynamic_zh.js
+│   ├── genshin
+│   │   ├── genshin_de.js
+│   │   ├── genshin_en.js
+│   │   ├── genshin_es.js
+│   │   ├── genshin_fr.js
+│   │   ├── genshin_id.js
+│   │   ├── genshin_jp.js
+│   │   ├── genshin_ko.js
+│   │   ├── genshin_pt.js
+│   │   ├── genshin_ru.js
+│   │   ├── genshin_th.js
+│   │   ├── genshin_vn.js
+│   │   ├── genshin_zh.js
+│   ├── nsfw
+│   │   ├── nsfw_de.js
+│   │   ├── nsfw_en.js
+│   │   ├── nsfw_es.js
+│   │   ├── nsfw_fr.js
+│   │   ├── nsfw_id.js
+│   │   ├── nsfw_jp.js
+│   │   ├── nsfw_ko.js
+│   │   ├── nsfw_pt.js
+│   │   ├── nsfw_ru.js
+│   │   ├── nsfw_th.js
+│   │   ├── nsfw_vn.js
+│   │   ├── nsfw_zh.js
+│   ├── index.js
+├── public
+│   ├── index.html
+│   ├── style.css
+├── script
+│   ├── serverList.js
+├── state
+│   ├── inputManager.js
+├── utils
+│   ├── characterHelpers.js
+│   ├── characterStatus.js
+│   ├── cooldownManager.js
+│   ├── fixUserMaps.js
+│   ├── interactionHelpers.js
+│   ├── logger.js
+│   ├── sendLongMessage.js
+│   ├── sendSafeReply.js
+├── .env
+├── .gitignore
+├── db.js
+├── deploy-commands.js
+├── index.js
+├── output.txt
+├── package-lock.json
+├── package.json
+├── README.md
+├── text.txt

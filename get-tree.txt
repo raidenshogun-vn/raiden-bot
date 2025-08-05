@@ -1,0 +1,44 @@
+PS F:\X-FILE\Code_UNI\Node JS\bot discord\Genshin Char\Furina 4> function Show-Tree($path, $indent = "") {
+     Get-ChildItem $path | Where-Object { $_.Name -ne "node_modules" } | ForEach-Object {
+         Write-Host "$indent├── $($_.Name)"
+         if ($_.PSIsContainer) {
+             Show-Tree $_.FullName "$indent│   "
+         }
+     }
+ }
+ 
+ Show-Tree .
+📌 Lazy place ☁ (975771463154028564) — 👥 9 thành viên
+📌 𝚛𝚊𝚌𝚝𝚎𝚛 (1142731041484836935) — 👥 110 thành viên
+📌 the Rebel of Thailand Alliance (1245223923961040908) — 👥 52 thành viên
+📌 Main (1263617439443451906) — 👥 19 thành viên
+📌 MTF - G4S (1285266240759267339) — 👥 21 thành viên
+📌 Nigguslaughterzone (1294337865102131200) — 👥 14 thành viên
+📌 Dezzy (1303913801346711562) — 👥 9 thành viên
+📌 EE (1307634140396523530) — 👥 4 thành viên
+📌 「 ✦ Akira's Server ✦ 」 (1325183937634631750) — 👥 20 thành viên
+📌 Server Madridistas (1327118973799764099) — 👥 10 thành viên
+📌 MELLYp9 CHILL's SERVER❤ (1341149122539032586) — 👥 74 thành viên
+📌 ࣪𓏲ּ ᥫ᭡ ₊ ⊹ ˑ ִ ֶ 𓂃ցαуѕ ࣪𓏲ּ ᥫ᭡ ₊ ⊹ ˑ ִ ֶ 𓂃 (1354262494645846096) — 👥 33 thành viên
+📌 Passione Gang★ (1362441676840501280) — 👥 39 thành viên
+📌 dunno lol (1362624886245167195) — 👥 17 thành viên
+📌 𝐨𝐮𝐦𝐢⭑𓂃 (1364270183513854095) — 👥 244 thành viên
+📌 The World of Furina (1373341404033716295) — 👥 8 thành viên
+📌 ୨୧﹒ ﹒Spyzhub﹒꒱ྀི (1374939193154732092) — 👥 10 thành viên
+📌 BBL (1375777636999106710) — 👥 19 thành viên
+📌 Tamida (1377349839150649454) — 👥 21 thành viên
+📌 Hi's server (1378684092102737920) — 👥 12 thành viên
+📌 Máy chủ của Snyder (1379271156955222157) — 👥 3 thành viên
+📌 Máy chủ của mia (1379531108491853824) — 👥 5 thành viên
+📌 Máy chủ test (1381603383647014992) — 👥 4 thành viên
+📌 Máy chủ của Mita (1382121509014732802) — 👥 4 thành viên
+📌 ✮ ⋆ ˚｡𖦹 FONTAINE IN TEYVAT⊂∘˚˳° (1389606757852119120) — 👥 13 thành viên
+📌 Alexander flores santiago (1389819875253555291) — 👥 18 thành viên
+📌 Skibidi (1390606332716908584) — 👥 8 thành viên
+📌 GASPOcm (1390971545530273862) — 👥 43 thành viên
+📌 gay server (1391453068025139364) — 👥 7 thành viên
+📌 TEST SERVER (1393405594958041218) — 👥 10 thành viên
+📌 ο(=•ω＜=)ρ⌒☆🎀𝓰𝓾𝓲𝓵𝓭 (1393697512128516278) — 👥 7 thành viên
+📌 MEWOO 😽 (1396460810318119002) — 👥 16 thành viên
+📌 Respaldo de Amigos de Genshin (1396541047139729530) — 👥 2 thành viên
+✅ Tổng cộng bot đang ở 33 server.
