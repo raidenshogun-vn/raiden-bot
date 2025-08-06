@@ -5,14 +5,7 @@ const userSchema = new mongoose.Schema({
 
   language: { type: String, default: 'vn' },
 
-  dmMode: { type: String, default: null },
-
-  serverModes: {
-    type: Map,
-    of: String,
-    default: {}
-  }
-
+  dmMode: { type: String, default: null }
 }, { timestamps: true });
 
 module.exports = mongoose.model('User', userSchema);

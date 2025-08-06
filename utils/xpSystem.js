@@ -1,35 +1,30 @@
 const UserXP = require('../models/UserXP');
 const { createLevelCard } = require('../utils/levelCard');
+const levelRoles = require('../config/levelRoles/raiden');
 
 const config = {
   enabled: true,
   xpNormal: 10,
   xpBonus: 100,
   cooldownNormal: 10 * 1000, // 10 giây
-  cooldownBonus: 60 * 1000,  // 60 giây
-  levelRoles: {
-    5: '💠 Traveler',
-    10: '🌟 Adventurer',
-    15: '⚔️ Battle-Hardened',
-    20: '🔥 Vision Holder',
-    25: '💫 Elemental Master',
-    30: '🎭 Mirror of Judgment',
-    35: '🌌 Voice of Fontaine',
-    40: '🎐 Whisper of Archons',
-    45: '🔱 Justice Seeker',
-    50: '👑 Court Performer',
-    55: '🌊 Ocean-Blessed',
-    60: '🌀 Divine Choreographer',
-    65: '🕊️ Celestia’s Watcher',
-    70: '💎 Crowned Dreamer',
-    75: '🩵 Furina’s Herald',
-    80: '🎇 Legendary Duelist',
-    85: '📜 Lorekeeper of The Oratrice',
-    90: '🌈 Echo of Eternity',
-    95: '🩸 Heart of Fontaine',
-    100: '💎 Follower of Furina Supreme'
-  }
+  cooldownBonus: 60 * 1000   // 60 giây
 };
+
+// 🔢 Hàm tính cấp độ từ XP theo công thức: x^2 * 100 + x * 1000
+function getLevelFromXP(xp) {
+  let level = 1;
+  while (true) {
+    const requiredXP = level * level * 100 + level * 1000;
+    if (xp < requiredXP) break;
+    level++;
+  }
+  return level - 1;
+}
+
+// 🔢 Hàm tính tổng XP cần để lên cấp x
+function getXPForLevel(level) {
+  return level * level * 100 + level * 1000;
+}
 
 /**
  * @param {Message} message
@@ -62,7 +57,7 @@ async function handleLeveling(message, isTalkingToBot = false) {
   // Kiểm tra cooldown
   if (timeSinceLast < cooldown) return;
 
-  // Nếu vừa nói chuyện với Furina xong thì phải chờ 60s để được +10
+  // Nếu vừa nói chuyện với bot xong thì phải chờ 60s để được +10
   if (!isTalkingToBot && data.lastIsBonus && timeSinceLast < config.cooldownBonus) {
     return;
   }
@@ -75,17 +70,17 @@ async function handleLeveling(message, isTalkingToBot = false) {
   data.xp += xpToAdd;
   console.log(`📈 +${xpToAdd} XP cho ${member.user.tag} (${data.xp} XP hiện tại)`);
 
-  const newLevel = Math.floor(Math.sqrt(data.xp / 100));
+  const newLevel = getLevelFromXP(data.xp);
 
   // Nếu lên cấp
   if (newLevel > data.level) {
     data.level = newLevel;
 
-    const roleName = config.levelRoles[newLevel] || 'Adventurer';
-    const nextXP = 100 * Math.pow(newLevel + 1, 2);
+    const roleName = levelRoles[newLevel] || 'Adventurer';
+    const nextXP = getXPForLevel(newLevel + 1);
 
     // 🏆 Tính rank dựa trên XP
-    const allUsers = await UserXP.find().sort({ xp: -1 });
+    const allUsers = await UserXP.find({ guildId }).sort({ xp: -1 });
     const userRank = allUsers.findIndex(entry => entry.userId === userId) + 1;
 
     const notice = await message.reply(`🖌️ Đang xử lý lên cấp...`);
@@ -100,7 +95,7 @@ async function handleLeveling(message, isTalkingToBot = false) {
       data.xp,
       nextXP,
       cleanRoleName,
-      userRank // truyền vào đây!
+      userRank
     );
 
     // Gửi thông báo lên cấp

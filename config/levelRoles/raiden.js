@@ -1,0 +1,22 @@
+module.exports = {
+  5: '⚡ Inazuman Wanderer',
+  10: '🈶 Vision Wielder',
+  15: '🗡️ Shogunate Loyalist',
+  20: '🎐 Stormy Blade',
+  25: '⛩️ Shrine Sentinel',
+  30: '🪷 Thunder Disciplinary',
+  35: '⚔️ Yashura Duelist',
+  40: '🌀 Electro Acolyte',
+  45: '👘 Elegance of Eternity',
+  50: '🗻 Balethunder Survivor',
+  55: '🎇 Eye of Judgment',
+  60: '💮 Enlightened Meditator',
+  65: '🌩️ Will of the Shogun',
+  70: '🕊️ Silent Sovereign',
+  75: '🔮 Electro Emissary',
+  80: '👑 Puppet Commander',
+  85: '⚡ Raiden’s Hand',
+  90: '🌌 Dream of the Euthymia',
+  95: '🩸 Oath of Transience',
+  100: '🌸 Vessel of Eternity'
+};
