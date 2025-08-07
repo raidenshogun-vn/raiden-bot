@@ -32,11 +32,14 @@ module.exports = {
       }
 
       // ✅ Gửi chào mừng nếu có kênh phù hợp
-      if (systemChannel) {
+        if (systemChannel) {
           await systemChannel.send(
-        `🎉 **Welcome! ${character.displayName} has joined your server.**\n` +
-        `📢 Stay updated with the latest announcements and news in our support server: [click here](https://discord.gg/GkRRamE3Zh)`
-      );
+    `🌟 **Thank you for adding ${character.displayName} to your server!**\n` +
+    `If you're interested in new Genshin Impact bots or want to receive the latest updates and announcements,\n` +
+    `feel free to join our official support server: [click here](https://discord.gg/GkRRamE3Zh)\n\n` +
+    `Thank you for using this bot!`
+  );
+
         console.log(`📬 Đã gửi chào mừng đến ${guild.name}`);
       } else {
         console.warn(`⚠️ Không tìm được kênh phù hợp để gửi chào mừng trong ${guild.name}`);
