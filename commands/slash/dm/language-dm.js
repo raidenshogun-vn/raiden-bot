@@ -1,7 +1,7 @@
 const { SlashCommandBuilder } = require('discord.js');
 const character = require('../../../config/character');
 const languageDisplayNames = require('../../../config/languageMap');
-const {loadLanguages} = require('../../../helpers/getLang');
+const { loadLanguages } = require('../../../helpers/getLang');
 const clearChatHistory = require('../../../helpers/dm/clearChatHistory');
 const User = require('../../../models/User');
 const { safeUpdate } = require('../../../utils/interactionHelpers');
@@ -15,21 +15,21 @@ const languageChoices = availableLanguages.map(langCode => ({
 }));
 
 function getSafeLangCode(langCode) {
-  return availableLanguages.includes(langCode) ? langCode : 'vn';
+  return availableLanguages.includes(langCode) ? langCode : 'en';
 }
 
 function getLangMessages(langCode) {
   const lang = getSafeLangCode(langCode);
-  return allLanguages[lang]?.language || allLanguages.vn.language;
+  return allLanguages[lang]?.language || allLanguages.en.language;
 }
 
 module.exports = {
   data: new SlashCommandBuilder()
     .setName('language-dm')
-    .setDescription(`Thay đổi ngôn ngữ của ${character.displayName}`)
+    .setDescription(`Change ${character.displayName}'s language`)
     .addStringOption(option =>
       option.setName('lang')
-        .setDescription('Ngôn ngữ bạn muốn sử dụng')
+        .setDescription('The language you want to use')
         .setRequired(true)
         .addChoices(...languageChoices)
     ),
@@ -108,7 +108,7 @@ module.exports = {
     } catch (err) {
       console.error('[LANGUAGE-DM] ❌ Error:', err);
 
-      const errorMessage = `❌ Đã xảy ra lỗi: \`${err.message}\``;
+      const errorMessage = `❌ An error occurred: \`${err.message}\``;
 
       if (interaction.replied || interaction.deferred) {
         await interaction.followUp({ content: errorMessage, ephemeral: true });

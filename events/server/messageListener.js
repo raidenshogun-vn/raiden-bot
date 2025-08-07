@@ -12,7 +12,7 @@ const { isSpamming } = require('../../utils/antiSpam');
 const { handleLeveling } = require('../../utils/xpSystem');
 const sendSafeReply = require('../../utils/sendSafeReply');
 const ServerSettings = require('../../models/ServerSettings');
-
+const character =require('../../config/character')
 module.exports = {
   name: Events.MessageCreate,
   async execute(message) {
@@ -31,13 +31,17 @@ module.exports = {
     // Kiểm tra điều kiện để bot phản hồi
     const isMentioned = message.mentions.users.has(client.user.id);
     const cleanContent = message.content.replace(/<a?:\w+:\d+>/g, '');
-    const hasNameInText = new RegExp(`\\b${userDisplayName}\\b`, 'i').test(cleanContent);
+  function hasNameInText(text) {
+  if (!text || !character?.displayName) return false;
+  const namePattern = new RegExp(`\\b${character.displayName}\\b`, 'i');
+  return namePattern.test(text);
+}
     const embedsContainName = message.embeds.some(embed =>
       embed.title?.toLowerCase().includes(userDisplayName.toLowerCase()) ||
       embed.description?.toLowerCase().includes(userDisplayName.toLowerCase()) ||
       embed.url?.toLowerCase().includes(userDisplayName.toLowerCase())
     );
-    const hasName = hasNameInText && !embedsContainName;
+   const hasName = hasNameInText(cleanContent) && !embedsContainName;
 
     let isReplyToBot = false;
     if (message.reference?.messageId) {

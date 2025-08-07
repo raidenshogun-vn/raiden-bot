@@ -185,6 +185,15 @@ interaction_nsfw_sv: [
   "Bắt họ phải lặp lại những cụm từ hạ thấp hoặc tôn sùng ('Nói đi, em là con điếm của Shogun-sama')",
   "Sau mỗi hành động, luôn hỏi 'Cảm giác thế nào?' để bắt họ phải sống lại và mô tả khoái cảm/nỗi đau"
 ],
+
+quirks_nsfw_sv: [
+  "Cực kỳ hưng phấn khi nghe người kia rên tên mình trong lúc tự thỏa mãn",
+  "Thích mặc kimono mở toang, không mặc gì bên trong mỗi khi bắt đầu 'trừng phạt'",
+  "Luôn mang theo một dải ruy băng tím mượt để trói lại người không nghe lời",
+  "Có sở thích đặc biệt với tiếng van xin và những giọt nước mắt đẫm ham muốn",
+  "Càng bị kích thích hơn khi được gọi là 'Shogun-sama' lúc cao trào"
+],
+
 // Gợi ý tinh chỉnh cho quotes_nsfw_sv
 quotes_nsfw_sv: [
   "Cái lồn của ta đang co giật không ngừng. Ngươi định làm gì để lấp đầy nó?",

@@ -1,24 +1,27 @@
 const {
   SlashCommandBuilder,
-  PermissionFlagsBits,
+  ButtonBuilder,
+  ActionRowBuilder,
+  ButtonStyle,
+  ComponentType,
 } = require('discord.js');
-
 const { getLang } = require('../../../helpers/getLang');
 const clearChannelChatHistory = require('../../../helpers/server/clearChannelChatHistory');
 const character = require('../../../config/character');
 const ServerChatHistory = require('../../../models/ServerChatHistory');
 const getLangCodeFromChannel = require('../../../helpers/server/getLangCodeFromChannel');
+const safeUpdate = require('../../../utils/interactionHelpers').safeUpdate;
 
 module.exports = {
   data: new SlashCommandBuilder()
     .setName('set-channel-mode')
-    .setDescription(`Chọn chế độ trò chuyện cho ${character.displayName} tại kênh hiện tại`)
+    .setDescription(`Select the chat mode for ${character.displayName} in this channel`)
     .addStringOption(option =>
       option.setName('mode')
-        .setDescription('Chọn chế độ')
+        .setDescription('Choose a mode')
         .setRequired(true)
         .addChoices(
-          { name: 'TEACHER (Raiden dạy nấu ăn)', value: 'TEACHER' },
+          { name: 'TEACHER (Raiden teaches cooking)', value: 'TEACHER' },
           { name: 'NSFW (18+)', value: 'NSFW' },
         )
     ),
@@ -28,40 +31,35 @@ module.exports = {
       const serverId = interaction.guildId;
       const channelId = interaction.channelId;
       const selectedMode = interaction.options.getString('mode');
+      const userId = interaction.user.id;
 
-      // ✅ Lấy language từ ServerChatHistory nếu có
-      let langCode;
       const existing = await ServerChatHistory.findOne({ serverId, channelId });
-      if (existing?.language) {
-        langCode = existing.language;
-      } else {
-        // ❗ Fallback nếu chưa có
-        langCode = await getLangCodeFromChannel(serverId, channelId, interaction.guild) || 'en';
-      }
-
-      const lang = getLang(langCode).setMode;
-
-      // ✅ Cập nhật mode trong ServerChatHistory
+      const langCode = existing?.language || await getLangCodeFromChannel(serverId, channelId, interaction.guild) || 'en';
+      const lang = getLang(langCode);
+      const t = lang.setMode;
+      // Nếu không phải NSFW → vẫn update và xoá lịch sử
       await ServerChatHistory.findOneAndUpdate(
         { serverId, channelId },
         { mode: selectedMode },
         { upsert: true, new: true, setDefaultsOnInsert: true }
       );
 
-      // ✅ Xoá lịch sử chat trong kênh hiện tại
       await clearChannelChatHistory(serverId, channelId);
+      
+      const modeText = typeof t.modeChanged === 'function'
+        ? t.modeChanged(selectedMode)
+        : `✅ Mode changed to ${selectedMode}.`;
 
-      // ✅ Phản hồi thành công
       await interaction.reply({
-        content: lang.modeChanged(selectedMode),
-        ephemeral: true,
+        content: modeText,
+        ephemeral: false,
       });
 
     } catch (err) {
-      console.error('❌ Lỗi khi xử lý /set-channel-mode:', err);
+      console.error('❌ Error while processing /set-channel-mode:', err);
       if (!interaction.replied && !interaction.deferred) {
         await interaction.reply({
-          content: '❌ Đã xảy ra lỗi không mong muốn.',
+          content: '❌ An unexpected error occurred.',
           ephemeral: true,
         });
       }
