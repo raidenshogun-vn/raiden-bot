@@ -7,7 +7,8 @@ const promptModes = {
   SERVER: {}
 };
 
-['DM', 'SERVER'].forEach(context => {
+// Duyệt qua thư mục chữ thường
+['dm', 'server'].forEach(context => {
   const contextDir = path.join(baseDir, context);
 
   if (!fs.existsSync(contextDir)) {
@@ -17,6 +18,7 @@ const promptModes = {
 
   fs.readdirSync(contextDir).forEach(modeName => {
     const modePath = path.join(contextDir, modeName);
+
     if (!fs.existsSync(modePath) || !fs.lstatSync(modePath).isDirectory()) {
       console.warn(`⚠️ Mode folder không tồn tại hoặc không phải thư mục: ${modePath}`);
       return;
@@ -31,11 +33,12 @@ const promptModes = {
       if (lowerFile.startsWith(prefix) && file.endsWith('.js')) {
         const langCode = file.slice(prefix.length).replace('.js', '');
         const fullPath = path.join(modePath, file);
+
         try {
           const promptModule = require(fullPath);
           if (typeof promptModule === 'function') {
             languages[langCode] = promptModule;
-            console.log(`✅ Loaded: ${context}/${modeName}/${file}`);
+            console.log(`✅ Loaded: ${context.toUpperCase()}/${modeName.toUpperCase()}/${file}`);
           } else {
             console.warn(`⚠️ File ${file} trong ${context}/${modeName} không export function`);
           }
@@ -45,7 +48,10 @@ const promptModes = {
       }
     });
 
-    promptModes[context][modeName.toUpperCase()] = languages;
+    // Gán vào object chữ HOA để đồng nhất logic truy xuất
+    const contextKey = context.toUpperCase();       // "DM" hoặc "SERVER"
+    const modeKey = modeName.toUpperCase();         // ví dụ "AUTORES"
+    promptModes[contextKey][modeKey] = languages;
   });
 });
 
