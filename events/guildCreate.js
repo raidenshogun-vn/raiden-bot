@@ -33,13 +33,10 @@ module.exports = {
 
       // ✅ Gửi chào mừng nếu có kênh phù hợp
       if (systemChannel) {
-        await systemChannel.send(
-          `🌟 **Thank you for adding ${character.displayName} to your server!**\n` +
-            `By default, ${character.displayName} speaks Vietnamese.\n` +
-            " You can change it using `/language`.\n"+
-            "You can also use `/set-mode` to choose a chat mode.\n" +
-            "If you need help, try `/settings` or send feedback using `/report`!"
-        );
+          await systemChannel.send(
+        `🎉 **Welcome! ${character.displayName} has joined your server.**\n` +
+        `📢 Stay updated with the latest announcements and news in our support server: [click here](https://discord.gg/GkRRamE3Zh)`
+      );
         console.log(`📬 Đã gửi chào mừng đến ${guild.name}`);
       } else {
         console.warn(`⚠️ Không tìm được kênh phù hợp để gửi chào mừng trong ${guild.name}`);
