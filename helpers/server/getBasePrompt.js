@@ -3,12 +3,12 @@ async function getBasePrompt(language, mode = '',character) {
   const contextKey = 'SERVER';
   const modePrompts = promptModules?.[contextKey]?.[mode];
 
-  console.log('🔍 getBasePrompt (SERVER) Debug:', {
-    contextKey,
-    mode,
-    hasModePrompts: !!modePrompts,
-    language,
-  });
+  // console.log('🔍 getBasePrompt (SERVER) Debug:', {
+  //   contextKey,
+  //   mode,
+  //   hasModePrompts: !!modePrompts,
+  //   language,
+  // });
 
   if (!modePrompts) {
     console.warn(`⚠️ Không tìm thấy mode "${mode}" trong context "${contextKey}"`);
@@ -19,7 +19,7 @@ async function getBasePrompt(language, mode = '',character) {
   if (typeof promptFn === 'function') {
   
     const result = promptFn(character);
-    console.log('✅ Prompt function found and called (SERVER)');
+    // console.log('✅ Prompt function found and called (SERVER)');
     return result;
   }
   console.log('📦 modePrompts:', modePrompts);

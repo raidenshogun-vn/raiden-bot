@@ -138,21 +138,21 @@ const customTemp = 1;
       try {
         const model = getCachedModel(keyEntry.key, modelId, maxTokens, customTemp);
 
-        const finalPrompt = {
-          systemInstruction: {
-            role: 'system',
-            parts: [{ text: systemPrompt }]
-          },
-          contents: [
-            {
-              role: 'user',
-              parts: [{ text: `${note}\n${displayName}: ${prompt}\n${character.displayName}:` }]
-            }
-          ]
-        };
+        // const finalPrompt = {
+        //   systemInstruction: {
+        //     role: 'system',
+        //     parts: [{ text: systemPrompt }]
+        //   },
+        //   contents: [
+        //     {
+        //       role: 'user',
+        //       parts: [{ text: `${note}\n${displayName}: ${prompt}\n${character.displayName}:` }]
+        //     }
+        //   ]
+        // };
 
-        logger.info('📤 Gemini Prompt Sent:');
-        logger.info(JSON.stringify(finalPrompt, null, 2));
+        // logger.info('📤 Gemini Prompt Sent:');
+        // logger.info(JSON.stringify(finalPrompt, null, 2));
 
         const response = await retryWithBackoff(() =>
           model.generateContent({

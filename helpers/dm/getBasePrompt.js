@@ -4,12 +4,12 @@ async function getBasePrompt(language, mode = '', character) {
   const contextKey = 'DM';
   const modePrompts = promptModules?.[contextKey]?.[mode];
 
-  console.log('🔍 getBasePrompt_dm Debug:', {
-    contextKey,
-    mode,
-    hasModePrompts: !!modePrompts,
-    language,
-  });
+  // console.log('🔍 getBasePrompt_dm Debug:', {
+  //   contextKey,
+  //   mode,
+  //   hasModePrompts: !!modePrompts,
+  //   language,
+  // });
 
   if (!modePrompts) {
     console.warn(`⚠️ Không tìm thấy mode "${mode}" trong context "${contextKey}"`);
