@@ -104,7 +104,7 @@ module.exports = {
 
       const embed = new EmbedBuilder()
         .setTitle(lang.image?.embedTitle || `${character.displayName} image`)
-        .setThumbnail(`attachment://${chosenFile}`)
+         .setImage(`attachment://${chosenFile}`)
         .setFooter({ text: isOld ? (lang.image?.oldFooter || 'This image has been shown before.') : (lang.image?.newFooter || 'This is a new image.') });
 
       await interaction.editReply({
