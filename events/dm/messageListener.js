@@ -15,6 +15,7 @@ const enhancePromptWithContext = require('../../helpers/enhancePromptWithContext
 module.exports = {
   name: Events.MessageCreate,
   async execute(message) {
+    
     if (message.author.bot || message.channel.type !== ChannelType.DM) return;
 
     const userId = message.author.id;
@@ -35,7 +36,7 @@ module.exports = {
 
     const userLanguage = user.language || 'vn';
     const lang = getLang(userLanguage);
-
+    const userDisplayName = message.author.globalName || message.author.displayName || username;
     // 🔔 Thông báo chọn ngôn ngữ nếu lần đầu
     try {
       const alreadyNoticed = await UserNotice.findOne({
@@ -70,7 +71,7 @@ module.exports = {
         enhancedPrompt,
         userLanguage,
         userId,
-        username
+        userDisplayName
       );
 
       console.log(`💌 ${username} đang chat tại DM với ${displayName}`);
